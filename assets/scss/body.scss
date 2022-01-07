@@ -1,0 +1,15 @@
+body {
+  min-height: calc(100 * var(--vh, 1vh));
+  background-color: #000;
+  background-image: linear-gradient(rgba(#000, 0.76), rgba(#000, 0.76)), url('/img/background-pattern_16px.png');
+  background-size: cover, 80px 80px;
+  font-size: 24px;
+  color: #fff;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+
+  @media not all and (min-resolution:.001dpcm) {
+    background-image: linear-gradient(rgba(#000, 0.76), rgba(#000, 0.76)), url('/img/background-pattern_160px.png');
+  }
+}

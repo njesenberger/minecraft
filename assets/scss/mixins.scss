@@ -1,0 +1,7 @@
+@mixin focus($selectors...) {
+  @for $i from 0 to length($selectors) {
+    body.user-is-tabbing #{nth($selectors, $i + 1)}:focus {
+      @content;
+    }
+  }
+}

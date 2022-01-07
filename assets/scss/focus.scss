@@ -1,0 +1,10 @@
+:focus {
+  outline-color: transparent;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
+body.user-is-tabbing :focus {
+  box-shadow: 0 0 0 1px white, 0 0 0 4px var(--selectionColor);
+}

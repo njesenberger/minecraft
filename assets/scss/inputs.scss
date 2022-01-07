@@ -1,0 +1,118 @@
+:-webkit-autofill {
+  box-shadow: 0 0 0 20px #fff inset;
+  -webkit-text-fill-color: #000;
+
+  &::first-line {
+    font-size: inherit;
+    font-family: inherit;
+  }
+}
+
+@supports(-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none) {
+  input[type="checkbox"],
+  input[type="radio"] {
+    --activeColor: #000;
+    --inactiveColor: #ddd;
+    position: relative;
+    border: 1px solid var(--inactiveColor);
+    height: 20px;
+    min-height: 20px;
+    background-color: #fff;
+    appearance: none;
+    transition: border-color .2s, background-color .2s, opacity .2s;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &:checked {
+      border-color: var(--activeColor);
+      background-color: var(--activeColor);
+    }
+    
+    &:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    &:not(.switch) {
+      width: 20px;
+      min-width: 20px;
+
+      &::after {
+        opacity: 0;
+      }
+
+      &:checked::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    &:not(.switch) {
+      border-radius: 4px;
+
+      &::after {
+        top: 3px;
+        left: 6px;
+        border-right: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        width: 6px;
+        height: 10px;
+        min-width: 6px;
+        min-height: 10px;
+        transform: rotate(45deg);
+      }
+    }
+
+    &.switch {
+      border-radius: 12px;
+      width: 36px;
+      min-width: 36px;
+      background-color: var(--inactiveColor);
+
+      &:checked {
+        background-color: var(--activeColor);
+      }
+
+      &::after {
+        top: 2px;
+        left: 2px;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        min-width: 14px;
+        min-height: 14px;
+        background-color: #fff;
+        transform: translateX(0);
+        transition: transform .2s;
+      }
+
+      &:checked::after {
+        transform: translateX(16px);
+        background-color: #fff;
+      }
+    }
+  }
+
+  input[type="radio"] {
+    border-radius: 50%;
+
+    &::after {
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      min-height: 18px;
+      transform: scale(.5);
+      background-color: #fff;
+      opacity: 0;
+    }
+  }
+}
