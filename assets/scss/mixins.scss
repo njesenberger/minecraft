@@ -1,7 +1,11 @@
-@mixin focus($selectors...) {
-  @for $i from 0 to length($selectors) {
-    body.user-is-tabbing #{nth($selectors, $i + 1)}:focus {
-      @content;
-    }
+@mixin focus {
+  body.user-is-tabbing &:focus {
+    @content;
+  }
+}
+
+@mixin safari {
+  _::-webkit-full-page-media, _:future, :root & {
+    @content;
   }
 }

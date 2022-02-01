@@ -1,7 +1,10 @@
 <template>
-  <footer>
-    <p>Made by Nicolas J.</p>
-    <p>Not affiliated with Mojang or Microsoft</p>
+  <footer class="footer">
+    <p>
+      Made by
+      <a class="footer-link" href="https://www.linkedin.com/in/nicolas-jesenberger/" target="_blank" rel="noopener noreferrer">Nicolas J.</a>
+    </p>
+    <p>Not affiliated with Mojang or Microsoft!</p>
   </footer>
 </template>
 
@@ -12,7 +15,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-footer {
+.footer {
   display: flex;
   justify-content: space-between;
   padding: 8px;
@@ -20,5 +23,39 @@ footer {
   font-size: 24px;
   color: white;
   text-shadow: #3d3d3d .1em .1em;
+
+  @media (max-width: 740px) {
+    flex-direction: column;
+  }
+}
+
+.footer-link {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -.1em;
+    width: 100%;
+    height: .1em;
+    background-color: white;
+    box-shadow: .1em .1em #3d3d3d;
+  }
+
+  @include focus {
+    background-color: rgba(#000, .9);
+    color: #fcfc00;
+    text-shadow: #3f3f00 .1em .1em;
+
+    &::after {
+      background-color: #fcfc00;
+      box-shadow: .1em .1em #3e3e00;
+    }
+  }
+}
+
+.test {
+  white-space: nowrap;
 }
 </style>

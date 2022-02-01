@@ -2,8 +2,8 @@ export default () => {
   setViewHeight();
 
   window.addEventListener('resize', () => {
-    clearTimeout(window.resizedFinished);
-    window.resizedFinished = setTimeout(setViewHeight, 200);
+    clearTimeout(resizedFinished);
+    const resizedFinished = setTimeout(setViewHeight, 200);
   });
 
   function setViewHeight() {

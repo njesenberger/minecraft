@@ -1,2 +1,5 @@
-::selection {
+:not(:empty)::selection {
+  background-color: rgba(#fff, .9);
+  color: #221dff;
+  text-shadow: #c7c7ff .1em .1em;
 }

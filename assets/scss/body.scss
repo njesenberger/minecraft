@@ -9,7 +9,7 @@ body {
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 
-  @media not all and (min-resolution:.001dpcm) {
+  @include safari {
     background-image: linear-gradient(rgba(#000, 0.76), rgba(#000, 0.76)), url('/img/background-pattern_160px.png');
   }
 }

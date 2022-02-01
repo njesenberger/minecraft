@@ -3,12 +3,12 @@
     <div class="panorama-overlay" v-if="panoramaOverlay && panoramaHasOverlay"></div>
     <div :class="['panorama-cube-container', { 'blur': panoramaOverlay && panorama === 'classic' }]" v-if="panorama !== 'off'">
       <div class="panorama-cube">
-        <div class="panorama-cube-face front" :style="{ 'background-image': `url('/img/panorama/${panorama}/front.png')` }"></div>
-        <div class="panorama-cube-face back" :style="{ 'background-image': `url('/img/panorama/${panorama}/back.png')` }"></div>
-        <div class="panorama-cube-face left" :style="{ 'background-image': `url('/img/panorama/${panorama}/left.png')` }"></div>
-        <div class="panorama-cube-face right" :style="{ 'background-image': `url('/img/panorama/${panorama}/right.png')` }"></div>
-        <div class="panorama-cube-face top" :style="{ 'background-image': `url('/img/panorama/${panorama}/top.png')` }"></div>
-        <div class="panorama-cube-face bottom" :style="{ 'background-image': `url('/img/panorama/${panorama}/bottom.png')` }"></div>
+        <div class="panorama-cube-face front" :style="{ 'background-image': `url('/img/panoramas/${panorama}/front.png')` }"></div>
+        <div class="panorama-cube-face back" :style="{ 'background-image': `url('/img/panoramas/${panorama}/back.png')` }"></div>
+        <div class="panorama-cube-face left" :style="{ 'background-image': `url('/img/panoramas/${panorama}/left.png')` }"></div>
+        <div class="panorama-cube-face right" :style="{ 'background-image': `url('/img/panoramas/${panorama}/right.png')` }"></div>
+        <div class="panorama-cube-face top" :style="{ 'background-image': `url('/img/panoramas/${panorama}/top.png')` }"></div>
+        <div class="panorama-cube-face bottom" :style="{ 'background-image': `url('/img/panoramas/${panorama}/bottom.png')` }"></div>
       </div>
     </div>
   </div>

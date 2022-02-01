@@ -1,3 +1,15 @@
+button,
+button:disabled,
+[type="button"],
+[type="reset"],
+[type="submit"],
+[type="button"]:disabled,
+[type="reset"]:disabled,
+[type="submit"]:disabled,
+label[for] {
+  cursor: default;
+}
+
 :-webkit-autofill {
   box-shadow: 0 0 0 20px #fff inset;
   -webkit-text-fill-color: #000;

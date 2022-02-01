@@ -1,11 +1,12 @@
 <template>
   <button :class="['music-button', { 'active': isMusicPlaying }]" @click="toggleMusic()" type="button">
-    <span class="sr-only">Turn {{ isMusicPlaying ? 'off' : 'on' }} music</span>
+    <span class="sr-only">Toggle music</span>
   </button>
 </template>
 
 <script>
 import clickSound from '~/mixins/clickSound';
+let musicPlayer;
 
 export default {
   mixins: [clickSound],
@@ -14,17 +15,28 @@ export default {
       isMusicPlaying: false,
     };
   },
+  mounted() {
+    this.initMusicPlayer();
+  },
   methods: {
+    initMusicPlayer() {
+      musicPlayer = document.querySelector('#music-player');
+
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', this.playMusic);
+        navigator.mediaSession.setActionHandler('pause', this.pauseMusic);
+      };
+    },
     toggleMusic() {
       this.playClickSound();
-      const musicPlayer = document.querySelector('#music-player');
-      if (musicPlayer.paused) {
-        musicPlayer.play().then(() => this.isMusicPlaying = true);
-      }
-      else {
-        musicPlayer.pause();
-        this.isMusicPlaying = false;
-      };
+      musicPlayer.paused ? this.playMusic() : this.pauseMusic();
+    },
+    playMusic() {
+      musicPlayer.play().then(() => this.isMusicPlaying = true);
+    },
+    pauseMusic() {
+      musicPlayer.pause();
+      this.isMusicPlaying = false;
     },
   },
 };
@@ -35,34 +47,25 @@ export default {
   display: inline-block;
   width: 2.25em;
   height: 2.25em;
-  background-image: url('/img/music_button/off/default.png');
-  background-size: cover;
+  background-image: url('/img/music-button-sprites.jpg');
+  background-size: 200%;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  cursor: default;
+
+  &.active {
+    background-position-y: 100%;
+  }
 
   @media (hover: hover) {
     &:hover {
-      background-image: url('/img/music_button/off/hover.png');
+      background-position-x: 100%;
     }
   }
 
-  @include focus('.language-button') {
-    background-image: url('/img/music_button/off/hover.png');
-  }
-
-  &.active {
-    background-image: url('/img/music_button/on/default.png');
-
-    @media (hover: hover) {
-      &:hover {
-        background-image: url('/img/music_button/on/hover.png');
-      }
-    }
-
-    @include focus('.language-button') {
-      background-image: url('/img/music_button/on/hover.png');
-    }
+  @include focus {
+    background-position-x: 100%;
   }
 }
 </style>

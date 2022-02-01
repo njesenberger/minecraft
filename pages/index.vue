@@ -1,22 +1,26 @@
 <template>
   <main>
     <div class="menu-logo-container">
-      <img class="menu-logo" src="/img/minecraft-logo.png" alt="">
-      <q class="menu-splash-text" ref="splash-text">{{ $options.randomSplashText }}</q>
+      <img class="menu-logo" ref="logo" src="/img/minecraft-logo.png" alt="Minecraft">
+      <!-- <q class="menu-splash-text" ref="splash-text"></q> -->
+      <svg class="menu-splash-text-container" ref="splash-text-container">
+        <text class="menu-splash-text-shadow" ref="splash-text-shadow" x="0" y="0" dx="2.4" dy="2.4" fill="#3e3e00"></text>
+        <text class="menu-splash-text" ref="splash-text" x="0" y="0" fill="#fcfc00"></text>
+      </svg>
     </div>
     <nav class="menu-container">
       <div class="menu-top-container">
         <PrimaryButton class="menu-link" to="/singleplayer">Singleplayer</PrimaryButton>
-        <PrimaryButton class="menu-link" to="/">Multiplayer</PrimaryButton>
+        <PrimaryButton class="menu-link" type="button" disabled>Coming soon!</PrimaryButton>
         <PrimaryButton class="menu-link" href="https://www.minecraft.net" target="_blank" rel="noopener noreferrer">Minecraft Website</PrimaryButton>
       </div>
       <div class="menu-bottom-container">
-        <LanguageButton />
+        <LanguageButton class="menu-language-button" />
         <div class="menu-double-links-container">
           <PrimaryButton class="menu-link" to="/options">Options...</PrimaryButton>
           <PrimaryButton class="menu-link" to="/">Quit game</PrimaryButton>
         </div>
-        <MusicButton />
+        <MusicButton class="menu-music-button" />
       </div>
     </nav>
     <Footer />
@@ -25,23 +29,28 @@
 </template>
 
 <script>
-import splashes from '@/static/splashes.txt';
-
-const splashTexts = splashes.split('\n');
-const randomSplashText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
-const splashTextSize = `${Math.max(48 - randomSplashText.length, 18)}px`;
+import splashes from '~/static/splashes.txt';
 
 export default {
-  randomSplashText,
   head: {
     title: 'Title Screen',
   },
   mounted() {
-    this.setSplashTextSize();
+    this.initSplashText();
   },
   methods: {
-    setSplashTextSize() {
-      this.$refs['splash-text'].style.fontSize = splashTextSize;
+    initSplashText() {
+      const splashTexts = splashes.split('\n');
+      const randomSplashText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
+      this.$refs['splash-text-shadow'].textContent = randomSplashText;
+      this.$refs['splash-text'].textContent = randomSplashText;
+      const svg = this.$refs['splash-text-container'];
+      svg.addEventListener('load', () => {
+        const { x, y, width, height } = svg.getBBox();
+        svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+        svg.style.height = `${Math.max(40 - randomSplashText.length / 2, 12)}%`;
+        svg.style.animationPlayState = 'running';
+      });
     },
   },
 };
@@ -58,33 +67,27 @@ main {
 
 .menu-logo-container {
   position: relative;
-  width: fit-content;
-
-  @media (max-width: 780px) {
-    transform: scale(.8);
-  }
+  margin: 60px 20px 0;
+  max-width: 100%;
 }
 
 .menu-logo {
-  margin-top: 60px;
   width: 680px;
+  max-width: 100%;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 }
 
-.menu-splash-text {
-  display: inline-block;
+.menu-splash-text-container {
+  // overflow: visible;
   position: absolute;
   right: 20%;
   bottom: 0;
+  z-index: 1;
+  height: 0;
   transform: translateX(50%) scale(1) rotate(-20deg);
-  font-size: 24px;
-  color: #ff0;
-  text-shadow: #3f3f00 .1em .1em;
-  white-space: nowrap;
-  quotes: none;
-  animation: splashText .48s ease-in-out infinite;
+  animation: splashText .48s ease-in-out infinite paused;
 }
 
 @keyframes splashText {
@@ -99,10 +102,18 @@ main {
 	}
 }
 
+.menu-splash-text::selection {
+  fill: #221dff;
+}
+
 .menu-container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  // margin-top: 120px;
+  padding: 0 20px;
   width: 100%;
 }
 
@@ -119,7 +130,17 @@ main {
   display: grid;
   grid-template-columns: auto max(520px) auto;
   column-gap: .4em;
+  row-gap: .4em;
   margin-top: 2em;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+    max-width: 520px;
+    width: 100%;
+  }
+}
+
+.menu-language-button {
 }
 
 .menu-double-links-container {
@@ -128,31 +149,13 @@ main {
   column-gap: .4em;
   width: 100%;
   max-width: 520px;
+
+  @media (max-width: 700px) {
+    grid-area: 1 / 1 / 2 / 3;
+  }
 }
 
-.menu-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1em .24em;
-  height: 2.25em;
-  background-image: url('/img/button/default/left.png'), url('/img/button/default/right.png'), url('/img/button/default/inner.png');
-  background-size: contain, contain, auto 100%;
-  background-position: left, right, center;
-  background-repeat: no-repeat, no-repeat, repeat;
-  font-size: 24px;
-  color: white;
-  text-align: center;
-  text-shadow: #3f3f3f .1em .1em;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  cursor: default;
-
-  @media (hover: hover) {
-    &:hover {
-      background-image: url('/img/button/hover/left.png'), url('/img/button/hover/right.png'), url('/img/button/hover/inner.png');
-    }
-  }
+.menu-music-button {
+  justify-self: end;
 }
 </style>

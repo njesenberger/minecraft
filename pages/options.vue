@@ -9,42 +9,48 @@
 </template>
 
 <script>
-const panoramas = ['classic', 'aquatic', 'village_pillage', 'buzzy_bees', 'nether', 'caves_cliffs', 'caves_cliffs_2', 'off'];
-
-const panorama = {
-  classic: {
+const panoramas = [
+  {
     en: 'Classic',
     fr: 'Classique',
+    value:'classic',
   },
-  aquatic: {
+  {
     en: 'Aquatic',
     fr: 'Aquatique',
+    value:'aquatic',
   },
-  village_pillage: {
+  {
     en: 'Village & Pillage',
     fr: 'Village et Pillage',
+    value:'village_pillage',
   },
-  buzzy_bees: {
+  {
     en: 'Buzzy Bees',
-    fr: 'Abeilles Bourdonnantes'
+    fr: 'Abeilles Bourdonnantes',
+    value:'buzzy_bees',
   },
-  nether: {
+  {
     en: 'Nether',
     fr: 'Nether',
+    value:'nether',
   },
-  caves_cliffs: {
+  {
     en: 'Caves & Cliffs: I',
     fr: 'Grottes et Falaises : I',
+    value:'caves_cliffs',
   },
-  caves_cliffs_2: {
+  {
     en: 'Caves & Cliffs: II',
     fr: 'Grottes et Falaises : II',
+    value:'caves_cliffs_2',
   },
-  off: {
+  {
     en: 'OFF',
     fr: 'Non',
+    value:'off',
   },
-};
+];
 
 export default {
   head: {
@@ -55,7 +61,7 @@ export default {
       return this.$storage.state.panorama;
     },
     currentPanoramaName() {
-      return panorama[this.currentPanorama].en;
+      return panoramas.find(panorama => panorama.value === this.currentPanorama).en;
     },
     panoramaOverlay() {
       return this.$storage.state.panoramaOverlay;
@@ -63,9 +69,9 @@ export default {
   },
   methods: {
     changePanorama() {
-      const currentPanoramaIndex = panoramas.indexOf(this.currentPanorama);
+      const currentPanoramaIndex = panoramas.findIndex(panorama => panorama.value === this.currentPanorama);
       const nextPanoramaIndex = (currentPanoramaIndex + 1) % panoramas.length;
-      const newPanorama = panoramas[nextPanoramaIndex];
+      const newPanorama = panoramas[nextPanoramaIndex].value;
       this.$storage.setUniversal('panorama', newPanorama);
     },
     togglePanoramaOverlay() {

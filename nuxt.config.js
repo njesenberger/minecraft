@@ -2,7 +2,6 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s | Minecraft',
-    title: '...',
     htmlAttrs: {
       lang: 'en'
     },

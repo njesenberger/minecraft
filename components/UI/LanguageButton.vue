@@ -17,20 +17,21 @@ export default {
   display: inline-block;
   width: 2.25em;
   height: 2.25em;
-  background-image: url('/img/language_button/language-button.png');
-  background-size: cover;
+  background-image: url('/img/language-button-sprites.png');
+  background-size: 100%;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  cursor: default;
 
   @media (hover: hover) {
     &:hover {
-      background-image: url('/img/language_button/language-button-hover.png');
+      background-position-y: 100%;
     }
   }
 
-  @include focus('.language-button') {
-    background-image: url('/img/language_button/language-button-hover.png');
+  @include focus {
+    background-position-y: 100%;
   }
 }
 </style>

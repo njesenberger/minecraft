@@ -1,33 +1,52 @@
 <template>
-  <audio id="music-player" ref="music-player" @ended="playNextTrack()"></audio>
+  <audio id="music-player" @ended="playNextTrack()"></audio>
 </template>
 
 <script>
+let musicPlayer; 
+
 const trackList = [
   '/audio/musics/menu1.mp3',
   '/audio/musics/menu2.mp3',
   '/audio/musics/menu3.mp3',
   '/audio/musics/menu4.mp3',
+  '/audio/musics/menu5.mp3',
 ];
 
 export default {
   methods: {
-    initPlayer() {
-      this.$refs['music-player'].src = this.getRandomTrack();
+    initMusicPlayer() {
+      musicPlayer = document.querySelector('#music-player')
+      musicPlayer.src = this.getRandomTrack();
+      
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('previoustrack', () => {
+          musicPlayer.currentTime < 3 ? this.playPreviousTrack() : musicPlayer.currentTime = 0;
+        });
+        navigator.mediaSession.setActionHandler('nexttrack', this.playNextTrack);
+      };
     },
     getRandomTrack() {
-      const filteredTrackList = trackList.filter(track => track !== this.$refs['music-player'].src);
-      return filteredTrackList[Math.floor(Math.random() * filteredTrackList.length)];
+      return trackList[Math.floor(Math.random() * trackList.length)];
+    },
+    playPreviousTrack() {
+      const currentTrackIndex = this.getCurrentTrackIndex();
+      const previousTrackIndex = (currentTrackIndex === 0) ? trackList.length : (currentTrackIndex - 1);
+      musicPlayer.src = trackList[previousTrackIndex];
+      musicPlayer.play();
     },
     playNextTrack() {
-      const currentTrackIndex = trackList.indexOf(this.$refs['music-player'].getAttribute('src'));
+      const currentTrackIndex = this.getCurrentTrackIndex();
       const nextTrackIndex = (currentTrackIndex + 1) % trackList.length;
-      this.$refs['music-player'].src = trackList[nextTrackIndex];
-      this.$refs['music-player'].play();
+      musicPlayer.src = trackList[nextTrackIndex];
+      musicPlayer.play();
     },
+    getCurrentTrackIndex() {
+      return trackList.indexOf(musicPlayer.getAttribute('src'));
+    }
   },
   mounted() {
-    this.initPlayer();
+    this.initMusicPlayer();
   },
 };
 </script>
