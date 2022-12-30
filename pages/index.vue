@@ -3,22 +3,23 @@
     <div class="menu-logo-container">
       <img class="menu-logo" ref="logo" src="/img/minecraft-logo.png" alt="Minecraft">
       <!-- <q class="menu-splash-text" ref="splash-text"></q> -->
-      <svg class="menu-splash-text-container" ref="splash-text-container">
+      <!-- <svg class="menu-splash-text-container" ref="splash-text-container">
         <text class="menu-splash-text-shadow" ref="splash-text-shadow" x="0" y="0" dx="2.4" dy="2.4" fill="#3e3e00"></text>
         <text class="menu-splash-text" ref="splash-text" x="0" y="0" fill="#fcfc00"></text>
-      </svg>
+      </svg> -->
+      <SplashText />
     </div>
     <nav class="menu-container">
       <div class="menu-top-container">
-        <PrimaryButton class="menu-link" to="/singleplayer">Singleplayer</PrimaryButton>
-        <PrimaryButton class="menu-link" type="button" disabled>Coming soon!</PrimaryButton>
-        <PrimaryButton class="menu-link" href="https://www.minecraft.net" target="_blank" rel="noopener noreferrer">Minecraft Website</PrimaryButton>
+        <PrimaryButton class="menu-link" to="/singleplayer">{{ $t('singleplayer') }}</PrimaryButton>
+        <PrimaryButton class="menu-link" type="button">{{ $t('multiplayer') }}</PrimaryButton>
+        <PrimaryButton class="menu-link" href="https://www.minecraft.net" target="_blank" rel="noopener noreferrer">{{ $t('website') }}</PrimaryButton>
       </div>
       <div class="menu-bottom-container">
         <LanguageButton class="menu-language-button" />
         <div class="menu-double-links-container">
-          <PrimaryButton class="menu-link" to="/options">Options...</PrimaryButton>
-          <PrimaryButton class="menu-link" to="/">Quit game</PrimaryButton>
+          <PrimaryButton class="menu-link" :to="localePath('/options')">{{ $t('options') }}</PrimaryButton>
+          <PrimaryButton class="menu-link" to="/">{{ $t('quit') }}</PrimaryButton>
         </div>
         <MusicButton class="menu-music-button" />
       </div>
@@ -28,30 +29,33 @@
   </main>
 </template>
 
-<script>
-import splashes from '~/static/splashes.txt';
+<i18n>
+{
+  "en": {
+    "title": "Title Screen",
+    "singleplayer": "Singleplayer",
+    "multiplayer": "Multiplayer",
+    "website": "Minecraft Official Site",
+    "options": "Options...",
+    "quit": "Quit game"
+  },
+  "fr": {
+    "title": "Écran titre",
+    "singleplayer": "Solo",
+    "multiplayer": "Multijoueur",
+    "website": "Site officiel Minecraft",
+    "options": "Options...",
+    "quit": "Quitter le jeu"
+  }
+}
+</i18n>
 
+<script>
 export default {
-  head: {
-    title: 'Title Screen',
-  },
-  mounted() {
-    this.initSplashText();
-  },
-  methods: {
-    initSplashText() {
-      const splashTexts = splashes.split('\n');
-      const randomSplashText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
-      this.$refs['splash-text-shadow'].textContent = randomSplashText;
-      this.$refs['splash-text'].textContent = randomSplashText;
-      const svg = this.$refs['splash-text-container'];
-      svg.addEventListener('load', () => {
-        const { x, y, width, height } = svg.getBBox();
-        svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
-        svg.style.height = `${Math.max(40 - randomSplashText.length / 2, 12)}%`;
-        svg.style.animationPlayState = 'running';
-      });
-    },
+  head() {
+    return {
+      title: this.$t('title'),
+    };
   },
 };
 </script>
@@ -79,32 +83,32 @@ main {
   image-rendering: crisp-edges;
 }
 
-.menu-splash-text-container {
-  // overflow: visible;
-  position: absolute;
-  right: 20%;
-  bottom: 0;
-  z-index: 1;
-  height: 0;
-  transform: translateX(50%) scale(1) rotate(-20deg);
-  animation: splashText .48s ease-in-out infinite paused;
-}
+// .menu-splash-text-container {
+//   position: absolute;
+//   right: 20%;
+//   bottom: 0;
+//   z-index: 1;
+//   height: 0;
+//   transform: translateX(50%) scale(1) rotate(-20deg);
+//   overflow: visible;
+//   animation: splashText .48s ease-in-out infinite paused;
+// }
 
-@keyframes splashText {
-	0% {
-		transform: translateX(50%) scale(1) rotate(-20deg);
-	}
-	50% {
-		transform: translateX(50%) scale(1.05) rotate(-20deg);
-	}
-	100% {
-		transform: translateX(50%) scale(1) rotate(-20deg);
-	}
-}
+// @keyframes splashText {
+// 	0% {
+// 		transform: translateX(50%) scale(1) rotate(-20deg);
+// 	}
+// 	50% {
+// 		transform: translateX(50%) scale(1.05) rotate(-20deg);
+// 	}
+// 	100% {
+// 		transform: translateX(50%) scale(1) rotate(-20deg);
+// 	}
+// }
 
-.menu-splash-text::selection {
-  fill: #221dff;
-}
+// .menu-splash-text::selection {
+//   fill: #221dff;
+// }
 
 .menu-container {
   flex-grow: 1;

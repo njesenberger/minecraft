@@ -1,12 +1,31 @@
 <template>
   <main>
     <div class="options-container">
-      <PrimaryButton @click.native="changePanorama()" type="button">Panorama: {{ currentPanoramaName }}</PrimaryButton>
-      <PrimaryButton @click.native="togglePanoramaOverlay()" type="button">Panorama Overlay: {{ panoramaOverlay ? 'ON' : 'OFF' }}</PrimaryButton>
+      <PrimaryButton @click.native="changePanorama()" type="button">{{ $t('panorama') }} {{ currentPanoramaName }}</PrimaryButton>
+      <PrimaryButton @click.native="togglePanoramaOverlay()" type="button">{{ $t('panoramaOverlay') }} {{ panoramaOverlay ? $t('on') : $t('off') }}</PrimaryButton>
     </div>
-    <PrimaryButton class="done-button" to="/">Done</PrimaryButton>
+    <PrimaryButton class="done-button" :to="localePath('/')">{{ $t('done') }}</PrimaryButton>
   </main>
 </template>
+
+<i18n>
+{
+  "en": {
+    "panorama": "Panorama:",
+    "panoramaOverlay": "Panorama Overlay:",
+    "done": "Done",
+    "on": "ON",
+    "off": "OFF"
+  },
+  "fr": {
+    "panorama": "Panorama :",
+    "panoramaOverlay": "Overlay du panorama :",
+    "done": "Terminé",
+    "on": "Oui",
+    "off": "Non"
+  }
+}
+</i18n>
 
 <script>
 const panoramas = [
@@ -36,13 +55,13 @@ const panoramas = [
     value:'nether',
   },
   {
-    en: 'Caves & Cliffs: I',
-    fr: 'Grottes et Falaises : I',
+    en: 'Caves & Cliffs I',
+    fr: 'Cavernes et Falaises I',
     value:'caves_cliffs',
   },
   {
-    en: 'Caves & Cliffs: II',
-    fr: 'Grottes et Falaises : II',
+    en: 'Caves & Cliffs II',
+    fr: 'Cavernes et Falaises II',
     value:'caves_cliffs_2',
   },
   {
@@ -54,14 +73,14 @@ const panoramas = [
 
 export default {
   head: {
-    title: 'Options',
+    title: 'Options...',
   },
   computed: {
     currentPanorama() {
       return this.$storage.state.panorama;
     },
     currentPanoramaName() {
-      return panoramas.find(panorama => panorama.value === this.currentPanorama).en;
+      return panoramas.find(panorama => panorama.value === this.currentPanorama)[this.$i18n.locale];
     },
     panoramaOverlay() {
       return this.$storage.state.panoramaOverlay;

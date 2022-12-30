@@ -48,6 +48,7 @@ export default {
   modules: [
     '@nuxtjs/style-resources',
     '@nuxtjs/universal-storage',
+    '@nuxtjs/i18n',
   ],
   storage: {
     initialState: { 
@@ -55,9 +56,27 @@ export default {
       panoramaOverlay: true,
     },
   },
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English (US)',
+      },
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        name: 'Français (France)',
+      },
+    ],
+    strategy: 'no_prefix',
+    defaultLocale: 'en',
+    detectBrowserLanguage: false,
+    vueI18nLoader: true,
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend (config, ctx) {
+    extend (config) {
       config.module.rules.push({
         enforce: 'pre',
         test: /\.txt$/,
