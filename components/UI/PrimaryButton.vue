@@ -1,5 +1,10 @@
 <template>
-  <component class="primary-button" :is="$attrs.to ? 'nuxt-link' : $attrs.href ? 'a' : 'button'" v-bind="$attrs" @click="$attrs.to ? null : playClickSound()" @click.native="$attrs.to ? playClickSound() : null">
+  <component
+    class="primary-button"
+    :is="$attrs.to ? 'nuxt-link' : $attrs.href ? 'a' : 'button'"
+    v-bind="$attrs"
+    @click="$attrs.to ? null : playClickSound()"
+    @click.native="$attrs.to ? playClickSound() : null">
       <slot></slot>
   </component>
 </template>
@@ -20,6 +25,8 @@ export default {
   position: relative;
   z-index: 0;
   padding-bottom: .24em;
+  width: 100%;
+  max-width: 540px;
   height: 2.25em;
   color: white;
   text-align: center;
@@ -34,6 +41,7 @@ export default {
     background-image: url('/img/button-sprites.png');
     background-size: auto 300%;
     background-position-y: 50%;
+    background-repeat: no-repeat;
   }
 
   &::after {

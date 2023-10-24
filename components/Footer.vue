@@ -1,12 +1,25 @@
 <template>
   <footer class="footer">
     <p>
-      Made by
-      <a class="footer-link" href="https://www.linkedin.com/in/nicolas-jesenberger/" target="_blank" rel="noopener noreferrer">Nicolas J.</a>
+      {{ $t('watermark') }}
+      <a class="footer-link" href="https://twitter.com/njesenberger" target="_blank" rel="noopener noreferrer">Nicolas Jesenberger</a>
     </p>
-    <p>Not affiliated with Mojang or Microsoft!</p>
+    <p>{{ $t('affiliation') }}</p>
   </footer>
 </template>
+
+<i18n>
+{
+  "en": {
+    "watermark": "Made by",
+    "affiliation": "Not affiliated with Mojang or Microsoft!"
+  },
+  "fr": {
+    "watermark": "Fait par",
+    "affiliation": "Non affilié à Mojang ou Microsoft !"
+  }
+}
+</i18n>
 
 <script>
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link class="language-button" to="/" @click.native="playClickSound()">
+  <nuxt-link class="language-button" :to="localePath('/language')" @click.native="playClickSound()">
     <span class="sr-only">Language</span>
   </nuxt-link>
 </template>
