@@ -11,7 +11,7 @@
     </div>
     <nav class="menu-container">
       <div class="menu-top-container">
-        <PrimaryButton class="menu-link" to="/singleplayer">{{ $t('singleplayer') }}</PrimaryButton>
+        <PrimaryButton class="menu-link" href="https://classic.minecraft.net" target="_blank" rel="noopener noreferrer">{{ $t('singleplayer') }}</PrimaryButton>
         <PrimaryButton class="menu-link" type="button">{{ $t('multiplayer') }}</PrimaryButton>
         <PrimaryButton class="menu-link" href="https://www.minecraft.net" target="_blank" rel="noopener noreferrer">{{ $t('website') }}</PrimaryButton>
       </div>
@@ -37,7 +37,7 @@
     "multiplayer": "Multiplayer",
     "website": "Minecraft Official Site",
     "options": "Options...",
-    "quit": "Quit game"
+    "quit": "Quit Game"
   },
   "fr": {
     "title": "Écran titre",

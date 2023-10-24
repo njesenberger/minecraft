@@ -3,14 +3,13 @@
 </template>
 
 <script>
-let musicPlayer; 
+let musicPlayer;
 
 const trackList = [
   '/audio/musics/menu1.mp3',
   '/audio/musics/menu2.mp3',
   '/audio/musics/menu3.mp3',
   '/audio/musics/menu4.mp3',
-  '/audio/musics/menu5.mp3',
 ];
 
 export default {
@@ -18,7 +17,7 @@ export default {
     initMusicPlayer() {
       musicPlayer = document.querySelector('#music-player')
       musicPlayer.src = this.getRandomTrack();
-      
+
       if ('mediaSession' in navigator) {
         navigator.mediaSession.setActionHandler('previoustrack', () => {
           musicPlayer.currentTime < 3 ? this.playPreviousTrack() : musicPlayer.currentTime = 0;

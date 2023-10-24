@@ -2,7 +2,7 @@
   <footer class="footer">
     <p>
       {{ $t('watermark') }}
-      <a class="footer-link" href="https://www.linkedin.com/in/nicolas-jesenberger/" target="_blank" rel="noopener noreferrer">Nicolas J.</a>
+      <a class="footer-link" href="https://twitter.com/njesenberger" target="_blank" rel="noopener noreferrer">Nicolas Jesenberger</a>
     </p>
     <p>{{ $t('affiliation') }}</p>
   </footer>

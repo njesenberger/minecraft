@@ -65,6 +65,11 @@ const panoramas = [
     value:'caves_cliffs_2',
   },
   {
+    en: 'The Wild Update',
+    fr: 'La mise à jour sauvage',
+    value:'the_wild_update',
+  },
+  {
     en: 'OFF',
     fr: 'Non',
     value:'off',
