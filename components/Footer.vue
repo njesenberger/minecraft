@@ -31,40 +31,28 @@ export default {
 .footer {
   display: flex;
   justify-content: space-between;
+  column-gap: 1.5em;
   padding: 8px;
   width: 100%;
   font-size: 24px;
   color: white;
   text-shadow: #3d3d3d .1em .1em;
 
-  @media (max-width: 740px) {
+  @media (max-width: 860px) {
     flex-direction: column;
   }
 }
 
 .footer-link {
   position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: -.1em;
-    width: 100%;
-    height: .1em;
-    background-color: white;
-    box-shadow: .1em .1em #3d3d3d;
-  }
+  text-decoration-line: underline;
+  text-underline-offset: .1em;
+  text-decoration-thickness: .1em;
 
   @include focus {
     background-color: rgba(#000, .9);
     color: #fcfc00;
     text-shadow: #3f3f00 .1em .1em;
-
-    &::after {
-      background-color: #fcfc00;
-      box-shadow: .1em .1em #3e3e00;
-    }
   }
 }
 

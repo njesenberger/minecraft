@@ -1,8 +1,8 @@
 <template>
   <main>
     <div class="options-container">
-      <PrimaryButton @click.native="changePanorama()" type="button">{{ $t('panorama') }} {{ currentPanoramaName }}</PrimaryButton>
-      <PrimaryButton @click.native="togglePanoramaOverlay()" type="button">{{ $t('panoramaOverlay') }} {{ panoramaOverlay ? $t('on') : $t('off') }}</PrimaryButton>
+      <PrimaryButton class="options-button" @click.native="changePanorama()" type="button">{{ $t('panorama') }} {{ currentPanoramaName }}</PrimaryButton>
+      <PrimaryButton class="options-button" @click.native="togglePanoramaOverlay()" type="button">{{ $t('panoramaOverlay') }} {{ panoramaOverlay ? $t('on') : $t('off') }}</PrimaryButton>
     </div>
     <PrimaryButton class="done-button" :to="localePath('/')">{{ $t('done') }}</PrimaryButton>
   </main>
@@ -109,16 +109,22 @@ export default {
 main {
   display: grid;
   place-items: center;
+  padding: 0 20px;
 }
 
 .options-container {
   display: grid;
   grid-template-columns: max(380px) max(380px);
+  justify-items: center;
   column-gap: .4em;
   row-gap: .4em;
+
+  @media (max-width: 840px) {
+    grid-template-columns: minmax(0, 480px);
+  }
 }
 
 .done-button {
-  width: 480px;
+  width: min(100%, 480px);
 }
 </style>

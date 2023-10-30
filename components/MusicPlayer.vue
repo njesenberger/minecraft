@@ -15,7 +15,7 @@ const trackList = [
 export default {
   methods: {
     initMusicPlayer() {
-      musicPlayer = document.querySelector('#music-player')
+      musicPlayer = document.querySelector('#music-player');
       musicPlayer.src = this.getRandomTrack();
 
       if ('mediaSession' in navigator) {
@@ -49,7 +49,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>
