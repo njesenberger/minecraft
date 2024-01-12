@@ -1,4 +1,6 @@
-# nuxt-template
+# Minecraft Title Screen
+
+There is a bug on newer Safari versions due to a regression
 
 ## Build Setup
 
